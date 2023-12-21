@@ -1,9 +1,18 @@
+import { useState } from "react";
 import pets from "../petsData";
 import PetItem from "./PetItem";
-
+import petsData from "../petsData";
+//import { useQuery } from "@sajari/react-hooks";
 function PetsList() {
-  const petList = pets.map((pet) => <PetItem pet={pet} key={pet.id} />);
+  const [query, setQuery] = useState("");
 
+  const petList = pets
+    .filter((pet) => pet.name.toLowerCase().includes(query.toLowerCase()))
+    .map((pet) => <PetItem pet={pet} key={pet.id} />);
+  //console.log(setQuery(65));
+  const search = (e) => {
+    setQuery(e.target.value);
+  };
   return (
     <section id="doctors" className="doctor-section pt-140">
       <div className="container">
@@ -15,13 +24,15 @@ function PetsList() {
               </h1>
               <div className="input-group rounded">
                 <input
+                  onChange={search}
                   type="search"
                   className="form-control rounded"
-                  placeholder="Search"
+                  placeholder="Type"
                   aria-label="Search"
                   aria-describedby="search-addon"
                 />
               </div>
+              {query}
               <br />
               Type:
               <select className="form-select">

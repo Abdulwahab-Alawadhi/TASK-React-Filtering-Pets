@@ -5,8 +5,11 @@ import "./assets/css/LineIcons.2.0.css";
 import "./assets/css/main.css";
 import "./assets/css/tiny-slider.css";
 import PetsList from "./Components/PetsList";
+import { useState } from "react";
 
 function App() {
+  const [count, setCount] = useState(0);
+
   return (
     <div className="App">
       <PetsList />
